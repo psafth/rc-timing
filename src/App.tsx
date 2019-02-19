@@ -5,7 +5,7 @@ import Statusbar from './components/Statusbar';
 
 class App extends Component {
   render() {
-    return (<div className="App">
+    return (<div className="App page">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1>
@@ -13,7 +13,6 @@ class App extends Component {
           </h1>
           
         </header>
-        <Statusbar />
       </div>
       );
       
