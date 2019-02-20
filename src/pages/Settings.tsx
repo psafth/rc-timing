@@ -1,9 +1,10 @@
 import React from 'react'
-class Settings extends React.Component {
+
+class SettingsPage extends React.Component {
     render() {
-        return <div className="settings page">
+        return <div className="page settings">
             <h1>Settings</h1>
         </div>
     }
 }
-export default Settings
+export default SettingsPage

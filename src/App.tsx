@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Statusbar from './components/Statusbar';
+import Statusbar from './components/Mylaps/Statusbar';
 
 class App extends Component {
   render() {

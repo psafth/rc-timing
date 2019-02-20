@@ -4,11 +4,13 @@ import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import Settings from './pages/Settings';
-import Statusbar from './components/Statusbar';
-import Menu from './components/Menu';
+
+import Statusbar from './components/Mylaps/Statusbar';
+import Menu from './components/Menu/Menu';
 
 import { initializeIcons } from '@uifabric/icons';
+import RacePage from './pages/Race';
+import SettingsPage from './pages/Settings';
 
 initializeIcons();
 
@@ -17,9 +19,8 @@ const routing = (
         <div className="main-container">
             <Menu />
             <Route exact path="/" component={App} key="home" />
-
-            <Route path="/settings" component={Settings} key="settings" />
-
+            <Route exact path="/race" component={RacePage} key="race" />
+            <Route path="/settings" component={SettingsPage} key="settings" />
             <Statusbar />
         </div>
 
