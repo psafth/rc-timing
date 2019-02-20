@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import '../App.css';
-import { StatusMessage } from '../../../mylaps-amb/dist/interface/IMylapsAMB';
+import '../../App.css';
+import { StatusMessage } from '../../../../mylaps-amb/dist/interface/IMylapsAMB';
 
 declare global {
     interface Window {

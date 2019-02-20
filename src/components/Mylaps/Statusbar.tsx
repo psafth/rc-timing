@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import '../App.css';
+import '../../App.css';
 import NoiseIndicator from './NoiseIndicator';
-import { StatusMessage } from '../../../mylaps-amb/dist/interface/IMylapsAMB';
+import { StatusMessage } from '../../../../mylaps-amb/dist/interface/IMylapsAMB';
 import { any } from 'prop-types';
 
 declare global {
