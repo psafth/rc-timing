@@ -6,6 +6,7 @@
 }
 html, body, div#root{
   height: 100%;
+  font: caption;
 }
 
 h1,h2,h3,h4,h5{
@@ -45,7 +46,7 @@ h1,h2,h3,h4,h5{
 
 .main-menu .menu-item i{
   font-size: 1.2rem;
-  margin-bottom: 5px;
+  line-height: 2;
 }
 
 .main-menu .menu-item:hover{
