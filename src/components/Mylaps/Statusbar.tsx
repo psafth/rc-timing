@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import '../../App.css';
+import './styles.css';
 import NoiseIndicator from './NoiseIndicator';
 import { StatusMessage } from '../../../../mylaps-amb/dist/interface/IMylapsAMB';
-import { any } from 'prop-types';
+import Flash from './Flash';
 
 declare global {
     interface Window {
@@ -32,6 +31,10 @@ class Statusbar extends Component<{}, IState> {
             status: "NO_CONNECTION"
         }
 
+        ipcRenderer.on('amb-time', (event: any, msg: any) => {
+            console.log("Time", msg);
+        });
+
         ipcRenderer.on('amb-status', (event: any, msg: StatusMessage) => {
             this.setState({
                 temperature: msg.temperature,
@@ -54,6 +57,9 @@ class Statusbar extends Component<{}, IState> {
         return (
             <div className="Statusbar">
                 <div className="container" style={this.state.status === "CONNECTED" ? { visibility: "visible" } : { visibility: "hidden" }}>
+                    <div className="item">
+                        <Flash duration={500} />
+                    </div>
                     <div className="item">{`${this.state.temperature} °C`}</div>
                     <div className="item">{`${this.state.voltage ? this.state.voltage.toFixed(1) : ''}V`}</div>
                     <div className="item">

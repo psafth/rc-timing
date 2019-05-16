@@ -8,12 +8,14 @@ const BrowserWindow = electron.BrowserWindow;
 const path = require('path');
 const url = require('url');
 
-const { MylapsCommunicator } = require("../mylaps-amb/dist");
+const { Mylaps } = require("../mylaps-amb/dist");
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 let client;
+
+let getTimeInterval;
 
 function createWindow() {
   // Create the browser window.
@@ -40,18 +42,38 @@ function createWindow() {
   })
 
 
-  client = new MylapsCommunicator();
+  client = new Mylaps.Communicator();
 
   client.on('connect', (msg) => {
-    console.log("Connected:", msg);
+    
+    client.getTime();
+
+    // request the decoders rtc every 5 minutes.
+    getTimeInterval = setInterval(() => {
+      client.getTime()
+    }, 60 * 1000)
   });
+
+  client.on('time', (msg) => {
+    mainWindow.send('amb-time', msg);
+  })
 
   client.on('status', (msg) => {
     mainWindow.send('amb-status', msg);
   });
 
   client.on('passing', (msg) => {
-    console.log("Passing:", msg);
+    let message = {
+      decoderId: msg.decoderId,
+      passingTimeRTC: msg.passingTimeRTC ? msg.passingTimeRTC.getTime(): undefined, 
+      passingTimeUTC: msg.passingTimeUTC ? msg.passingTimeUTC.getTime(): undefined, 
+      signalHits: msg.signalHits, 
+      signalStrength: msg.signalStrength,
+      transponderId: msg.transponderId,
+      transponderTemperature: msg.transponderTemperature,
+      transponderVoltage: msg.transponderVoltage
+  }
+    mainWindow.send('amb-passing', message);
   });
 
   client.on('error', (msg) => {

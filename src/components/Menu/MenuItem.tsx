@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import '../../App.css';
+import './styles.css';
 import { Link } from 'react-router-dom';
-import { Icon } from 'office-ui-fabric-react/lib/Icon';
+var FontAwesome = require('react-fontawesome');
 
 interface IMenuItemProps{
     target: string;
@@ -12,7 +12,7 @@ interface IMenuItemProps{
 class MenuItem extends Component<IMenuItemProps, {}> {
     render() {
             return  <Link to={this.props.target} className="menu-item">
-                        <Icon iconName={this.props.iconName} />
+                        <FontAwesome name={this.props.iconName} />
                         {this.props.title}
                     </Link>
     }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../../App.css';
+import './styles.css';
 import { StatusMessage } from '../../../../mylaps-amb/dist/interface/IMylapsAMB';
 
 declare global {
