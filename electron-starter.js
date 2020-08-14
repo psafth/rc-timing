@@ -45,7 +45,7 @@ function createWindow() {
   client = new Mylaps.Communicator();
 
   client.on('connect', (msg) => {
-    
+
     client.getTime();
 
     // request the decoders rtc every 5 minutes.
@@ -65,22 +65,25 @@ function createWindow() {
   client.on('passing', (msg) => {
     let message = {
       decoderId: msg.decoderId,
-      passingTimeRTC: msg.passingTimeRTC ? msg.passingTimeRTC.getTime(): undefined, 
-      passingTimeUTC: msg.passingTimeUTC ? msg.passingTimeUTC.getTime(): undefined, 
-      signalHits: msg.signalHits, 
+      passingTimeRTC: msg.passingTimeRTC ? msg.passingTimeRTC.getTime() : undefined,
+      passingTimeUTC: msg.passingTimeUTC ? msg.passingTimeUTC.getTime() : undefined,
+      signalHits: msg.signalHits,
       signalStrength: msg.signalStrength,
       transponderId: msg.transponderId,
       transponderTemperature: msg.transponderTemperature,
       transponderVoltage: msg.transponderVoltage
-  }
+    }
+    
     mainWindow.send('amb-passing', message);
   });
 
   client.on('error', (msg) => {
+    clearInterval(getTimeInterval);
     mainWindow.send('amb-disconnected', msg);
   });
 
   client.on('close', (msg) => {
+    clearInterval(getTimeInterval);
     mainWindow.send('amb-disconnected', msg);
   });
 }
